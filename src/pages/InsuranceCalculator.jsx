@@ -23,6 +23,8 @@ export function InsuranceCalculator(props) {
     const [defaultValues, setDefaultValues] = useState(InitialValues); // default values to render
     const [expenseData1, setexpenseData1] = useState(0); // default values to render
     const [expenseData2, setexpenseData2] = useState(0); // default values to render
+
+    const [isLoading, setIsLoading] = useState(false);
      
     function handleChange(name, value) {
       console.log(name, value);
@@ -32,7 +34,11 @@ export function InsuranceCalculator(props) {
         [name]: value
       };
 
-      setDefaultValues(newItem)
+
+      setIsLoading(true);
+      setTimeout(() => {
+        setDefaultValues(newItem)
+      }, 3000);
       
     }
 
@@ -82,12 +88,14 @@ export function InsuranceCalculator(props) {
             labels: [CONSTANTS.INSURANCE_PAGE.ESTM_COST,CONSTANTS.INSURANCE_PAGE.ESTM_COST],
             datasets: finalData
           })
+
+          setIsLoading(false);
       }
 
 
-      setTimeout(() => {
+      //setTimeout(() => {
         calChartFunc(defaultValues)
-      }, 3000);
+      //}, 3000);
     
 
         // console.log("jj", defaultValues)
@@ -96,6 +104,9 @@ export function InsuranceCalculator(props) {
     
       return (
         <div className="container">
+            {isLoading ? (
+              <div className="loader"></div>
+            ): "" }
 
             <div className="pagemain-header clearfix text-center mt-4"> 
                <h1 className="page-title ">Critical Illness Insurance Calculator</h1>
@@ -121,7 +132,7 @@ export function InsuranceCalculator(props) {
                    </div>                   
                     {data && data.datasets && data.datasets.length > 0  && <BarChart data={data} /> }
                     <p className="blue-text text-center mt-2">Assumptions</p>
-                    <p className="period-details">A serious illness with recovery lasting <span className="blue-text">{defaultValues.recoveryValue} months</span> could put your finances down by <span className="blue-text">${expenseData1}</span> today and by <span className="blue-text">${expenseData2}</span> in 10 years.</p>
+                    <p className="period-details">A serious illness with recovery lasting <span className="blue-text">{defaultValues.recoveryValue} months</span> could put your finances down by <span className="blue-text">${expenseData1.toLocaleString('en')}</span> today and by <span className="blue-text">${expenseData2.toLocaleString('en')}</span> in 10 years.</p>
                    <div className="btn-action"><Button  variant="primary" size={"lg"} >Start Comparing Quotes</Button></div> 
                 </div>
             </div>
