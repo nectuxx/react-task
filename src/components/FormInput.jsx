@@ -3,7 +3,7 @@ import NumberFormat from 'react-number-format';
 
 function FormInput(props) {
 //   const [inputType] = useState(props.type)
-  const [inputValue, setInputValue] = useState(props.defaultValue)
+  const [inputValue] = useState(props.defaultValue)
 
   function handleChange(event, name){
       console.log("eve",event, name);
