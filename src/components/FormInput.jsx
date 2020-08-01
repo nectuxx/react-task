@@ -18,11 +18,9 @@ function FormInput(props) {
   // console.log(inputValue);
   return (
     <>
-        <div className="form-group">
-            { props.label && <label>{ props.label }</label> }
+            { props.label && <label className="input-label">{ props.label }<span className="info-icon"></span></label> }
             {/* <input type={inputType} value={inputValue} name="input-form" onChange={handleChange} className="inputclass"/> */}
-            <NumberFormat datatype={props.type} thousandSeparator={','} decimalSeparator={'.'} prefix={props.prefix?"":'$'} defaultValue={inputValue[props.name]} onValueChange={(values) => handleChange(values, props.name)} suffix={props.suffix} />
-        </div>
+            <NumberFormat datatype={props.type} thousandSeparator={','} decimalSeparator={'.'} prefix={props.prefix?"":'$'} defaultValue={inputValue[props.name]} onValueChange={(values) => handleChange(values, props.name)} suffix={props.suffix} className="form-control"/>
     </>
   );
 }

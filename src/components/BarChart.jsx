@@ -30,7 +30,11 @@ const options = {
                return '$' + formatNumber(value);
             }
          }
-      }]
+      }],
+      xAxes: [{
+         // Change here
+        barPercentage: 0.4
+     }]
    }
   };
 
@@ -48,7 +52,7 @@ const options = {
     console.log(data)
     return (
       
-      <div className="col-md-8">
+      <div>
             {data && data.datasets && data.datasets.length > 0 && <Bar data={data} options={options}  /> }
       </div>
     );

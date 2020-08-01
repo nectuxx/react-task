@@ -95,28 +95,34 @@ export function InsuranceCalculator(props) {
     },[defaultValues]);
     
       return (
-        <div className="container-fluid">
+        <div className="container">
 
-            <div className="pagemain-header clearfix"> 
-               <h5 className="page-title">Insurance Calculator</h5>
+            <div className="pagemain-header clearfix text-center mt-4"> 
+               <h1 className="page-title ">Critical Illness Insurance Calculator</h1>
+               <p className="mt-3">Adjust the sliders to estimate the coverage amount you may need.</p>
             </div>
 
-            <div className = "col-md-12 row">
-                <div className="col-md-6">
-                  <form>
-                     
-                    <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL1} type={""} name={"income"} defaultValue={defaultValues} suffix={"/month"} />
+            <div className = "row insurance-calculator">
+                <div className="col-md-5 input-label-block">
+                  <form>                     
+                    <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL1} type={""} name={"income"} defaultValue={defaultValues} suffix={"/month"} className="input-label" />
                     <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL2} type={""} name={"expense1"} defaultValue={defaultValues} suffix={""} />
                     <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL3} type={""} name={"expense2"} defaultValue={defaultValues} suffix={""} />
                     <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL4} type={""} name={"expense3"}defaultValue={defaultValues} suffix={"/month"} />
                     <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.LBL5} type={""} name={"otherExpense"} defaultValue={defaultValues} suffix={"/month"} />
                   </form>
                 </div>
-                <div className="col-md-6">
-                    <FormInput onChange={handleChange} label={CONSTANTS.INSURANCE_PAGE.RECOVERY} type={""} prefix={"no"} name={"recoveryValue"} defaultValue={defaultValues} suffix={" months"} />
+                <div className="col-md-7 chart-block">
+                  <div className="recovery-period row">
+                      <label className="col-lg-5 col-sm-7 recover-label input-label"><span className="recover-icon"></span>{CONSTANTS.INSURANCE_PAGE.RECOVERY}<span className="info-icon"></span></label>
+                      <div className="col-lg-7 col-sm-5 mt-2">
+                      <FormInput onChange={handleChange}  type={""} prefix={"no"} name={"recoveryValue"} defaultValue={defaultValues} suffix={" months"} />
+                      </div>                 
+                   </div>                   
                     {data && data.datasets && data.datasets.length > 0  && <BarChart data={data} /> }
-                    <p>A serious illness with recovery lasting {defaultValues.recoveryValue} months could put your finances down by ${expenseData1} today and by ${expenseData2} in 10 years.</p>
-                    <Button variant="primary" size={"lg"} >Start Comparing Quotes</Button>
+                    <p className="blue-text text-center mt-2">Assumptions</p>
+                    <p className="period-details">A serious illness with recovery lasting <span className="blue-text">{defaultValues.recoveryValue} months</span> could put your finances down by <span className="blue-text">${expenseData1}</span> today and by <span className="blue-text">${expenseData2}</span> in 10 years.</p>
+                   <div className="btn-action"><Button  variant="primary" size={"lg"} >Start Comparing Quotes</Button></div> 
                 </div>
             </div>
         </div>
